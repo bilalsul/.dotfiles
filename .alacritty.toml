@@ -1,0 +1,17 @@
+[window]
+startup_mode = "SimpleFullscreen"
+opacity = 0.8
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xffffff"
+
+[font]
+normal = { family = "JetBrains Mono", style = "Regular" }
+size = 14.0
+
+[env]
+TERM = "tmux-256color"
+
+[mouse]
+hide_when_typing = true

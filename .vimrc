@@ -1,0 +1,61 @@
+set guicursor=
+set nonu
+set number
+
+set noerrorbells
+set hidden
+
+filetype plugin indent on
+autocmd FileType * setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+
+set wrap
+
+set noswapfile
+set nobackup
+set undofile
+set undodir=~/.vim/undo
+
+set hlsearch
+set incsearch
+set shortmess-=S
+set ignorecase
+set laststatus=0
+
+call plug#begin()
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'mbbill/undotree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'zivyangll/git-blame.vim'
+call plug#end()
+
+syntax on
+set noshowmode
+colorscheme catppuccin_mocha
+set termguicolors
+hi Normal guibg=NONE ctermbg=NONE
+
+let mapleader = " "
+nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+nnoremap Y yg$
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <silent> <C-s> <Cmd>!tmux neww ~/tmux-sessionizer.sh<CR><Cmd>redraw!<CR>
+nnoremap <silent> <C-f> <Cmd>!tmux neww ~/tmux-sessionfinder.sh<CR><Cmd>redraw!<CR>
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap <C-p> :GFiles<CR>
+command! -bang -nargs=* Vex execute 'GFiles' <q-args>
+nnoremap <C-h> <C-^>
+inoremap <C-h> <C-^>
+vnoremap <C-h> <C-^>
+nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>
+nnoremap <leader>n :nohlsearch<CR>
+nnoremap <leader>b <C-v>
+command! W w

@@ -1,0 +1,15 @@
+[user]
+  name = qazal
+  email = qazal.software@gmail.com
+[init]
+  defaultBranch = master
+[log]
+  date = local
+[core]
+  editor = vim
+[checkout]
+  defaultRemote = upstream
+[fetch]
+  prune = true
+[alias]
+  files = "!git diff HEAD..upstream/master --numstat"
