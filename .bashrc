@@ -51,3 +51,38 @@ fzf_search_history() {
 bind -x '"\C-r": fzf_search_history'
 bind -m vi-command -x '"\C-r": fzf_search_history'
 bind -m vi-insert -x '"\C-r": fzf_search_history'
+
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/flutter/bin:$PATH"
+
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+
+test -s ~/.alias && . ~/.alias || true
+
+alias c="clear"
+alias q="exit"
+alias v="vim"
+alias r="rmdir"
+alias t="tmux"
+alias gc="git clone"
+alias gs="git status"
+alias gcm="git commit -m"
+alias o="cat"
+alias xx="sudo shutdown now"
+alias hh="sudo systemctl hibernate"
+alias p="python3"
+. "$HOME/.cargo/env"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+# pnpm
+export PNPM_HOME="/home/blackginger/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
