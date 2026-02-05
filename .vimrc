@@ -37,6 +37,7 @@ set termguicolors
 hi Normal guibg=NONE ctermbg=NONE
 
 let mapleader = " "
+inoremap bb <Esc>l
 nnoremap <leader>pv :Ex<CR>
 nnoremap <leader>pv :Ex<CR>
 nnoremap <leader>u :UndotreeShow<CR>
