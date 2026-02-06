@@ -5,6 +5,7 @@ alias gg="git add . && git status -v | riff"
 alias gm="git checkout master"
 alias gmhr="git fetch upstream master && git reset --hard upstream/master"
 alias gdhr="git fetch upstream develop-live && git reset --hard upstream/develop-live"
+alias gbhr
 alias sghr="git read-tree --reset -u upstream/master"
 alias gmr="git fetch upstream master && git merge upstream/master --no-edit"
 alias gmc="git merge --continue"
@@ -60,6 +61,21 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 test -s ~/.alias && . ~/.alias || true
+
+function grf() {
+    if [ "$#" -ne 2 ]; then
+        echo "Usage: git-reset-force <commit-hash> <branch-name>"
+        return 1
+    fi
+    read -p "Are you sure you want to hard reset and force push to branch '$2'? This is destructive. (y/N): " confirm
+    if [[ "$confirm" == [yY] || "$confirm" == [yY][eE][sS] ]]; then
+        echo "Proceeding with git reset --hard $1 && git push origin $2 --force"
+        git reset --hard "$1" && git push origin "$2" --force
+    else
+        echo "Operation cancelled."
+    fi
+}
+
 
 alias c="clear"
 alias q="exit"
