@@ -5,7 +5,6 @@ alias gg="git add . && git status -v | riff"
 alias gm="git checkout master"
 alias gmhr="git fetch upstream master && git reset --hard upstream/master"
 alias gdhr="git fetch upstream develop-live && git reset --hard upstream/develop-live"
-alias gbhr
 alias sghr="git read-tree --reset -u upstream/master"
 alias gmr="git fetch upstream master && git merge upstream/master --no-edit"
 alias gmc="git merge --continue"
