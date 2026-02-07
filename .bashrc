@@ -27,6 +27,50 @@ function gd() {
   eval $(open https://github.com/$(git remote get-url upstream | cut -d':' -f2)/compare/master...qazalin:$(git branch --show-current))
 }
 
+gco() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: gc 'your message'"
+        return 1
+    fi
+    git add -A && git commit -m "$*"
+}
+
+nuke() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: nuke <commit/ref>   (e.g. HEAD~2, abc1234)"
+        return 1
+    fi
+    git reset --hard "$1"
+}
+
+# Create PR quickly (assumes branch already pushed)
+# Usage: gpr master    or   gpr develop "Better title than branch name"
+gpr() {
+    local base="master"
+    local title=""
+
+    if [ $# -ge 1 ]; then
+        base="$1"
+        shift
+    fi
+
+    if [ $# -gt 0 ]; then
+        title="$*"
+    else
+        title="$(git rev-parse --abbrev-ref HEAD)"
+    fi
+
+    gh pr create \
+        --base "$base" \
+        --title "$title" \
+        --draft \
+        --web
+}
+
+# Open current PR in browser (to check /files tab)
+prv() {
+    gh pr view --web
+
 PS1='$(if [[ $? == 0 ]]; then echo "\w"; else echo "\[\e[31m\]\w\[\e[0m\]"; fi)$(git branch 2>/dev/null | grep \* | sed "s/* / (/" | sed "s/$/) /")> '
 
 export TERM=tmux-256color
