@@ -120,6 +120,94 @@ function grf() {
     fi
 }
 
+# ==================== yt-dlp Advanced Shortcuts ====================
+yt() {
+    local opt="$1"
+    local url="$2"
+
+    case "$opt" in
+        # === Quality Options ===
+        2160|4k|4K)
+            echo "📥 Downloading best 4K (2160p)..."
+            yt-dlp -S "res:2160" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+        
+        1440|2k|2K)
+            echo "📥 Downloading best 1440p (2K)..."
+            yt-dlp -S "res:1440" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        1080)
+            echo "📥 Downloading best 1080p..."
+            yt-dlp -S "res:1080" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        720)
+            echo "📥 Downloading best 720p..."
+            yt-dlp -S "res:720" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        480)
+            echo "📥 Downloading best 480p..."
+            yt-dlp -S "res:480" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        360)
+            echo "📥 Downloading best 360p..."
+            yt-dlp -S "res:360" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        240)
+            echo "📥 Downloading best 240p..."
+            yt-dlp -S "res:240" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+
+        # === Special Options ===
+        best|highest)
+            echo "📥 Downloading highest available quality..."
+            yt-dlp -S "res,best" --merge-output-format mp4 --embed-subs --embed-metadata "$url"
+            ;;
+            
+        q|Q|list|formats|f)
+            echo "🔍 Listing available formats..."
+            yt-dlp -F "$url" | tail -n 40
+            ;;
+            
+        audio|mp3|a)
+            echo "🎵 Downloading audio only (best quality mp3)..."
+            yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-metadata "$url"
+            ;;
+            
+        opus|webm)
+            echo "🎵 Downloading best audio (opus)..."
+            yt-dlp -x --audio-format opus --embed-metadata "$url"
+            ;;
+            
+        thumb|thumbnail)
+            echo "🖼️  Downloading thumbnail..."
+            yt-dlp --write-thumbnail --skip-download "$url"
+            ;;
+            
+        *)
+            echo "📋 Usage:"
+            echo "   yt 4k      <URL>     → 2160p (4K)"
+            echo "   yt 1440    <URL>     → 1440p (2K)"
+            echo "   yt 1080    <URL>     → 1080p"
+            echo "   yt 720     <URL>     → 720p"
+            echo "   yt 480     <URL>     → 480p"
+            echo "   yt 360     <URL>     → 360p"
+            echo "   yt 240     <URL>     → 240p"
+            echo ""
+            echo "   yt best    <URL>     → Best available"
+            echo "   yt q       <URL>     → List all formats"
+            echo "   yt audio   <URL>     → MP3 audio only"
+            echo "   yt thumb   <URL>     → Download thumbnail only"
+            echo ""
+            echo "Example: yt 720 https://youtu.be/xxxx"
+            ;;
+    esac
+}
+
 
 alias c="clear"
 alias q="exit"
