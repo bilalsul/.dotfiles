@@ -232,3 +232,8 @@ esac
 # pnpm end
 
 
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
